@@ -1,5 +1,6 @@
 import { Flex, Paper, Image, Avatar, Divider, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import logo from "../assets/StudyLobby.svg"
 
 export const Header = () => {
   const isMobile = useMediaQuery("(max-width: 750px)");
@@ -14,7 +15,7 @@ export const Header = () => {
           wrap={"wrap"}
           gap={15}
         >
-          <Image radius="md" w={200} src="/StudyLobby.svg" />
+          <Image radius="md" w={200} src={logo} />
           <Flex gap={15} align="center">
             {!isMobile && <Text>{`${name}` || ""}</Text>}
 

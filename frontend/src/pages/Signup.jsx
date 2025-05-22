@@ -12,6 +12,8 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { notifications } from "@mantine/notifications";
+import logo from "../assets/StudyLobby.svg"
+
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -83,7 +85,7 @@ export const Signup = () => {
       align="center"
       h={"100vh"}
     >
-      <Image radius="md" w={250} src="/StudyLobby.svg" />
+      <Image radius="md" w={250} src={logo} />
       <Card w={300} shadow="sm" padding="lg" radius="lg" withBorder>
         <Flex direction={"column"} gap={10}>
           <Title order={3}>Sign Up</Title>

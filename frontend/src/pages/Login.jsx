@@ -13,10 +13,9 @@ import { useState } from "react";
 import axios from "axios";
 import { BackendURL } from "../utils/constants";
 import { jwtDecode } from "jwt-decode";
-import { notifications } from '@mantine/notifications';
-import axiosInstance from "../utils/axiosInstance";
-
-
+import { notifications } from "@mantine/notifications";
+import axiosAuthInstance from "../utils/axiosAuthinstance";
+import logo from "../assets/StudyLobby.svg"
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -31,15 +30,15 @@ export const Login = () => {
   const handleLogin = async () => {
     if (!email || !password) {
       notifications.show({
-        title: 'Error',
-        message: 'Please fill in both email and password.',
-      })
+        title: "Error",
+        message: "Please fill in both email and password.",
+      });
       return;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       notifications.show({
-        title: 'Error',
+        title: "Error",
         message: "Please enter a valid email address.",
       });
       return;
@@ -54,21 +53,25 @@ export const Login = () => {
       if (response.data.status === 200) {
         const decoded = jwtDecode(response.data.data);
         localStorage.setItem("token", response.data.data);
-        axiosInstance.defaults.headers["Authorization"]=`Bearer ${response.data.data}`;
+
+        axiosAuthInstance.defaults.headers[
+          "Authorization"
+        ] = `Bearer ${response.data.data}`;
+
         console.log(decoded.data.username);
         localStorage.setItem("username", decoded.data.username);
         navigate("/dashboard/session");
       } else {
         notifications.show({
-          title: 'Login failed',
-          message: response.data.msg || 'An error occurred during login.',
-        })
+          title: "Login failed",
+          message: response.data.msg || "An error occurred during login.",
+        });
       }
     } catch (err) {
       notifications.show({
-        title: 'Login failed',
-        message: 'An error occurred during login.',
-      })
+        title: "Login failed",
+        message: "An error occurred during login.",
+      });
     }
   };
 
@@ -80,13 +83,13 @@ export const Login = () => {
       align="center"
       h={"100vh"}
     >
-      <Image radius="md" w={250} src="/StudyLobby.svg" />
+      <Image radius="md" w={250} src={logo} />
       <Card w={300} shadow="sm" padding="lg" radius="lg" withBorder>
         <Flex direction={"column"} gap={10}>
           <Title order={3}>Log in</Title>
           <Input.Wrapper label="Email">
             <Input
-            required
+              required
               type="email"
               placeholder="email"
               radius="md"
@@ -96,7 +99,7 @@ export const Login = () => {
           </Input.Wrapper>
           <Input.Wrapper label="Password">
             <Input
-            required
+              required
               type="password"
               placeholder="password"
               radius="md"
