@@ -11,16 +11,16 @@ const axiosAuthInstance = axios.create({
 });
 
 // logout when token expired
-axiosAuthInstance.interceptors.response.use(
-  (response) => response,
-  (error) => {
+//axiosAuthInstance.interceptors.response.use(
+//  (response) => response,
+//   (error) => {
     
-    if (error.response && error.response.status === 401) {
-      localStorage.clear();
-      window.location.href = "/";
-    }
-    return Promise.reject(error);
-  }
-);
+//    if (error.response && error.response.status === 401) {
+//      localStorage.clear();
+//      window.location.href = "/";
+//    }
+//    return Promise.reject(error);
+//  }
+//);
 
 export default axiosAuthInstance;
