@@ -37,7 +37,7 @@ const login = async (req, res) => {
     if (user) {
       if (user.password === password) {
         const token = jwt.sign({ data: user }, process.env.JWT_pass, {
-          expiresIn: "1m",
+          expiresIn: "4h",
         });
         res.json({ msg: "login succesfull", status: 200, data: token });
       } else {
